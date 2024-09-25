@@ -1,0 +1,81 @@
+import UIKit
+
+class SelectGroupJoinVC: UIViewController {
+    
+    let arrName = ["Find Soulmate", "Art Lover", "Lets Drive", "Find Friends", "Lets Explore", "Get a Drink", "Wellness", "Meet Up", "Get a Coffee", "Freelancer", "Lets Shopping", "Party Night", "Pets Lover", "Cycling", "Technology", "Women Club"]
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        self.tableView.register(UINib(nibName: "OnboardingTVCell", bundle: nil), forCellReuseIdentifier: "cell")
+      
+        tableView.register(UINib(nibName: "OnboardingTVCell", bundle: nil), forCellReuseIdentifier: "OnboardingTVCell")
+          
+    }
+
+    @IBAction func actionHobbies(_ sender: Any) {
+        let HobbiesScreenVC = HobbiesScreenVC (nibName: "HobbiesScreenVC", bundle: nil)
+        navigationController?.pushViewController(HobbiesScreenVC, animated: true)
+    }
+    
+}
+extension SelectGroupJoinVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 16
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "OnboardingTVCell") as? OnboardingTVCell)!
+        
+        cell.tblImage.image = UIImage(named: String(indexPath.row + 31)) // Assets image name (31)
+        cell.tblLabel.text = arrName[indexPath.row]
+        // cell.tblLabel.text = "Anil \(indexPath.row+1)"
+        return cell
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+}
+    
+
+
+===========================================================================================================================================
+
+                                                   0r TV Cell Xib
+                                                ===================
+
+
+import UIKit
+
+class OnboardingTVCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var tblImage: UIImageView!
+ 
+    @IBOutlet weak var tblLabel: UILabel!
+    
+    static let identifier = "OnboardingTVCell"
+    
+    static func nib() -> UINib {
+        return UINib(nibName: "OnboardingTVCell", bundle: nil)
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+}
